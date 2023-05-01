@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, Button } from "@dynatrace/strato-components-preview";
-
+import {Card} from '../components/Card'
 
 
 export const Home = () => {
   const theme = useCurrentTheme();
+  const [email, setEmail] = useState('');
+
 
 
   return (
@@ -24,13 +26,16 @@ export const Home = () => {
       <Paragraph>To get started please enter an email address below</Paragraph>
       <Flex>
           <FormField label="Email">
-          <TextInput placeholder="john.smith@dynatraceapps.com" />
+          <TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} />
           </FormField>
-          <Button variant="emphasized">
-            <Button.Label>Email Lookup</Button.Label>
-          </Button>
+          
+          <Card
+          href="/data"
+          inAppLink
+          imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
+          name="Process results"
+        />
       </Flex>
-  
     </Flex>
   );
 };
