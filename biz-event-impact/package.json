@@ -11,7 +11,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@dynatrace/dt-app": "0.94.1",
+    "@dynatrace/dt-app": "0.100.0",
     "@types/node": "^16.11.34",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -30,11 +30,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@dynatrace-sdk/client-query-v02": "0.5.0",
+    "@dynatrace-sdk/navigation": "1.0.0",
     "@dynatrace/sdk-web": "0.7.3",
-    "@dynatrace/strato-components-preview": "0.89.0",
-    "@dynatrace-sdk/client-query-v02": "0.4.5",
-    "@dynatrace-sdk/navigation": "0.2.5",
-    "react": "^17.0.0",
+    "@dynatrace/strato-components-preview": "0.95.0",
+    "react": "^17.0.2",
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.4.1"
   }
