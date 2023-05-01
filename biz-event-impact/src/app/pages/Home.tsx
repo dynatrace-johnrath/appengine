@@ -1,9 +1,12 @@
 import React from "react";
-import { Flex, Heading, Paragraph, Strong, useCurrentTheme } from "@dynatrace/strato-components-preview";
-import { Card } from "../components/Card";
+import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, Button } from "@dynatrace/strato-components-preview";
+
+
 
 export const Home = () => {
   const theme = useCurrentTheme();
+
+
   return (
     <Flex flexDirection="column" alignItems="center" padding={32}>
       <img
@@ -14,30 +17,20 @@ export const Home = () => {
         style={{ paddingBottom: 32 }}
       ></img>
 
-      <Heading>Welcome To Your Dynatrace App</Heading>
+      <Heading>Dynatrace Non-Named Biz Event Impact Anaylsis App</Heading>
       <Paragraph>
-        Edit <Strong>src/app/pages/Home.tsx</Strong> and save to reload the app.
+        This app is designed to assist a new App developer better understand the basics of the application 
       </Paragraph>
-      <Paragraph>For more information and help on app development, check out the following:</Paragraph>
-
-      <Flex gap={48} paddingTop={64} flexFlow="wrap">
-        <Card
-          href="/data"
-          inAppLink
-          imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
-          name="Explore data"
-        />
-        <Card
-          href="https://dt-url.net/developers"
-          imgSrc={theme === "light" ? "./assets/devportal.png" : "./assets/devportal_dark.png"}
-          name="Dynatrace Developer"
-        />
-        <Card
-          href="https://dt-url.net/devcommunity"
-          imgSrc={theme === "light" ? "./assets/community.png" : "./assets/community_dark.png"}
-          name="Developer Community"
-        />
+      <Paragraph>To get started please enter an email address below</Paragraph>
+      <Flex>
+          <FormField label="Email">
+          <TextInput placeholder="john.smith@dynatraceapps.com" />
+          </FormField>
+          <Button variant="emphasized">
+            <Button.Label>Email Lookup</Button.Label>
+          </Button>
       </Flex>
+  
     </Flex>
   );
 };
