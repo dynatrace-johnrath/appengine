@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, Button } from "@dynatrace/strato-components-preview";
 import {Card} from '../components/Card'
+import { Data } from "./Data";
 
 
 export const Home = () => {
@@ -28,14 +29,14 @@ export const Home = () => {
           <FormField label="Email">
           <TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} />
           </FormField>
-          
-          <Card
+      </Flex>
+      <Card
           href="/data"
           inAppLink
           imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
           name="Process results"
         />
-      </Flex>
+        <Data />
     </Flex>
   );
 };
