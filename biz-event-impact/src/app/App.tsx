@@ -1,13 +1,13 @@
 import { Page } from "@dynatrace/strato-components-preview";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Data } from "./pages/Data";
 import { Header } from "./components/Header";
 import { Home } from "./pages/Home";
+import {Data} from "./pages/Data"
 
 export const App = () => {
   return (
-    <Page variant="centered">
+    <Page >
       <Page.Header>
         <Header />
       </Page.Header>
