@@ -11,6 +11,7 @@ export const Home = () => {
 
 
   return (
+    <>
     <Flex flexDirection="column" alignItems="center" padding={32}>
       <img
         src="./assets/Dynatrace_Logo.svg"
@@ -31,12 +32,13 @@ export const Home = () => {
           </FormField>
       </Flex>
       <Card
-          href="/data"
+          href=""
           inAppLink
           imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
           name="Process results"
         />
-        <Data />
     </Flex>
+    <Data bizobj="email"/>
+    </>
   );
 };

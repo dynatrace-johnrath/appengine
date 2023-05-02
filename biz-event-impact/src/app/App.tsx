@@ -14,7 +14,6 @@ export const App = () => {
       <Page.Main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/data" element={<Data />} />
         </Routes>
       </Page.Main>
     </Page>
