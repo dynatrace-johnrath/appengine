@@ -2,7 +2,7 @@ import React from "react"
 import { Flex, Paragraph, DQLEditor, Grid, Heading, useCurrentTheme } from "@dynatrace/strato-components-preview"
 import { Borders, BoxShadows, Colors } from '@dynatrace/strato-design-tokens';
 import { useDQLQuery } from "../hooks/useDQLQuery";
-import { Card } from '../components/Card';
+import { CardDQL } from '../components/CardDQL';
 
 type DataProps = {
     /**Biz Event Attribute */
@@ -11,43 +11,27 @@ type DataProps = {
 
 
 export const Data = ({bizobj}:DataProps) => {
-    const initialQuery = "fetch logs \n| summarize count(), by:bin(timestamp, 1m)";
-    const theme = useCurrentTheme();
+    const [resultStarted, isLoadingStarted] = useDQLQuery(
+        'fetch bizevents, from:now()-24hr | filter accountId == 100 | filter event.type == "easytrade.trade.buy" | summarize value = sum(amount)',
+        //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
+      );
+
+    const bookingStarted = Number(resultStarted?.records?.[0]?.value);
 
     return(
-        <Flex style={{
-            border: Colors.Border.Neutral.Default,
-            borderRadius: Borders.Radius.Container.Subdued,
-            background: Colors.Background.Surface.Default,
-            boxShadow: BoxShadows.Surface.Raised.Rest,
-            width: '400px',
-            height: '120px',
-            alignItems: "center",
-            justifyContent: 'center',
-          }}>
+        <Flex>
             <Paragraph>{bizobj}</Paragraph>
             {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={64} gridTemplateColumns={'2fr 2fr'}>
-            
+                <CardDQL
+                    value={bookingStarted}
+                    chartLabel="Amount bought (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={0}
+                    isLoading={isLoadingStarted}
+                />
             </Grid>
-            <Card
-                href="/data"
-                inAppLink
-                imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
-                name="Process results"
-            /> 
-            <Card
-                href="/data"
-                inAppLink
-                imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
-                name="Process results"
-            /> 
-            <Card
-                href="/data"
-                inAppLink
-                imgSrc={theme === "light" ? "./assets/data.png" : "./assets/data_dark.png"}
-                name="Process results"
-            /> 
         </Flex>
     );
 }
