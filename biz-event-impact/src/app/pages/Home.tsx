@@ -27,6 +27,7 @@ export const Home = () => {
   return (
     <>
     <ToastContainer />
+
     <Flex flexDirection="column" alignItems="center" padding={32}>
       <img
         src="./assets/Dynatrace_Logo.svg"
