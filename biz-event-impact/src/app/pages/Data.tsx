@@ -9,23 +9,26 @@ type DataProps = {
     bizobj: string;
 }
 
-
+const email = "dawn.meza@yahoo.com"
 export const Data = ({bizobj}:DataProps) => {
-
+    {/* example comment 
     //need to get the customers ID from email for the other queries
     const [emailToId, isLoadingStarted] = useDQLQuery(
-        'fetch bizevents, from:now()-24hr | filter accountId == 100 | filter event.type == "easytrade.trade.buy" | summarize value = sum(amount)',
+        'fetch bizevents | fields accountId, email | filter email == dawn.meza@yahoo.com | summarize value = takeFirst(accountId)',
+        //'fetch bizevents | fields accountId, email | filter email == ' + email + ' | summarize customerId = takeFirst(accountId)',
         //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
       );
-      //const emailId = String(emailToId?.records?.[0]?.value);
+    const emailId = Number(emailToId?.records?.[0]?.value);
+    //const emailId = 100
+    console.log("emailId " + emailId)
+
+ */}
     const emailId = 100
-
-
     const [resultStarted, isLoadingFinsihed] = useDQLQuery(
         'fetch bizevents, from:now()-24hr | filter accountId == ' + emailId + ' | filter event.type == "easytrade.trade.buy" | summarize value = sum(amount)',
         //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
       );
-
+     
     const bookingStarted = Number(resultStarted?.records?.[0]?.value);
 
     return(
