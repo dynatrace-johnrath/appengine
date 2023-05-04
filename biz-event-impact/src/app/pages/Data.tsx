@@ -22,7 +22,7 @@ export const Data = ({bizobj}:DataProps) => {
         <Flex>
             <Paragraph>{bizobj}</Paragraph>
             {/* <DQLEditor value={initialQuery} /> */}
-            <Grid gap={64} gridTemplateColumns={'2fr 2fr'}>
+            <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
                     value={bookingStarted}
                     chartLabel="Amount bought (24hrs)"
@@ -31,6 +31,31 @@ export const Data = ({bizobj}:DataProps) => {
                     chartPrecision={0}
                     isLoading={isLoadingStarted}
                 />
+                <CardDQL
+                    value={bookingStarted}
+                    chartLabel="Amount bought (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={0}
+                    isLoading={isLoadingStarted}
+                />
+                <CardDQL
+                    value={bookingStarted}
+                    chartLabel="Amount bought (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={0}
+                    isLoading={isLoadingStarted}
+                />
+                <CardDQL
+                    value={bookingStarted}
+                    chartLabel="Amount bought (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={0}
+                    isLoading={isLoadingStarted}
+                />
+
             </Grid>
         </Flex>
     );
