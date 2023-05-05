@@ -19,12 +19,14 @@ export const Data = ({bizobj}:DataProps) => {
 
     //have to delcare the query before calling query function
     //passing in userEmail to the query
-    const query = `fetch bizevents | fields accountId, email | filter email == "` + userEmail + `" | summarize value = takeFirst(accountId)`;
+    const emailToId = `fetch bizevents | fields accountId, email | filter email == "` + userEmail + `" | summarize value = takeFirst(accountId)`;
+    
     //run the query
-    const [emailQuery, isLoadingStarted] = useDQLQuery( query, );
+    const [emailQuery, isLoadingStarted] = useDQLQuery( emailToId, );
     //turn the query result into a const number
     const emailQueryId = Number(emailQuery?.records?.[0]?.value);
     //use returned userId result in the next query
+    //
     const [resultStarted, isLoadingFinsihed] = useDQLQuery(
         'fetch bizevents, from:now()-24hr | filter accountId == ' + emailQueryId + ' | filter event.type == "easytrade.trade.buy" | summarize value = sum(amount)',
         //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
@@ -33,7 +35,6 @@ export const Data = ({bizobj}:DataProps) => {
     const bookingStarted = Number(resultStarted?.records?.[0]?.value);
 
     return(
-        
         <Flex flexDirection="column" alignItems="center" padding={32}>
         {/* Adding user ID (email in the future) to the page */}
         <Heading>User Email: {userEmail}</Heading>
@@ -43,7 +44,7 @@ export const Data = ({bizobj}:DataProps) => {
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
                     value={bookingStarted}
-                    chartLabel="Amount bought (24hrs)"
+                    chartLabel="Amount of stocks bought (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={0}
