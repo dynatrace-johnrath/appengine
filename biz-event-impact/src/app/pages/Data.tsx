@@ -3,6 +3,7 @@ import { Flex, Paragraph, DQLEditor, Grid, Heading, useCurrentTheme } from "@dyn
 import { Borders, BoxShadows, Colors } from '@dynatrace/strato-design-tokens';
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from '../components/CardDQL';
+import { Header } from "@dynatrace/strato-components-preview/layouts/page/Header";
 
 type DataProps = {
     /**Biz Event Attribute */
@@ -12,18 +13,13 @@ type DataProps = {
 const email = "dawn.meza@yahoo.com"
 export const Data = ({bizobj}:DataProps) => { 
     //need to get the customers ID from email for the other queries
-    console.log(bizobj)
-    {/* example comment 
-    const bizObj1 = "dawn.meza@yahoo.com"
-    const helloWorld = `${"dawn.meza@yahoo.com"}`;
-    const dqlString = "fetch bizevents | fields accountId, email | filter email == " + helloWorld + " | summarize value = takeFirst(accountId)"
-    const [emailToId, isLoadingStarted] = useDQLQuery(
-        "fetch bizevents | fields accountId, email | filter email ==  | summarize value = takeFirst(accountId)",
-        //'fetch bizevents | fields accountId, email | filter email == ' + email + ' | summarize customerId = takeFirst(accountId)',
-        //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
-      );
-    const emailId = Number(emailToId?.records?.[0]?.value);
-    */}
+    
+    const userEmail = "dawn.meza@yahoo.com"
+
+    const query = `fetch bizevents | fields accountId, email | filter email == "dawn.meza@yahoo.com" | summarize value = takeFirst(accountId)`;
+    const [emailQuery, isLoadingStarted] = useDQLQuery( query, );
+    const emailQueryId = Number(emailQuery?.records?.[0]?.value);
+    
     const emailId = 100
     //onsole.log("emailId " + emailId)
 
@@ -40,11 +36,8 @@ export const Data = ({bizobj}:DataProps) => {
         
         <Flex flexDirection="column" alignItems="center" padding={32}>
         {/* Adding user ID (email in the future) to the page */}
-        <Heading>User Email: {emailId}</Heading>
-        
-        <Paragraph>
-            This app is designed to assist a new App developer better understand the basics of the application 
-        </Paragraph>
+        <Heading>User Email: {userEmail}</Heading>
+        <Heading>User Id: {emailQueryId}</Heading>
             
             {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
