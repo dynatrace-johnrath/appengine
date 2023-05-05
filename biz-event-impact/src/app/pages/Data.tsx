@@ -37,7 +37,15 @@ export const Data = ({bizobj}:DataProps) => {
     const bookingStarted = Number(resultStarted?.records?.[0]?.value);
 
     return(
-        <Flex>
+        
+        <Flex flexDirection="column" alignItems="center" padding={32}>
+        {/* Adding user ID (email in the future) to the page */}
+        <Heading>User Email: {emailId}</Heading>
+        
+        <Paragraph>
+            This app is designed to assist a new App developer better understand the basics of the application 
+        </Paragraph>
+            
             {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
