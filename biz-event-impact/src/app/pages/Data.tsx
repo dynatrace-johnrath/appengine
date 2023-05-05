@@ -10,20 +10,25 @@ type DataProps = {
 }
 
 const email = "dawn.meza@yahoo.com"
-export const Data = ({bizobj}:DataProps) => {
-    {/* example comment 
+export const Data = ({bizobj}:DataProps) => { 
     //need to get the customers ID from email for the other queries
+    console.log(bizobj)
+    {/* example comment 
+    const bizObj1 = "dawn.meza@yahoo.com"
+    const helloWorld = `${"dawn.meza@yahoo.com"}`;
+    const dqlString = "fetch bizevents | fields accountId, email | filter email == " + helloWorld + " | summarize value = takeFirst(accountId)"
     const [emailToId, isLoadingStarted] = useDQLQuery(
-        'fetch bizevents | fields accountId, email | filter email == dawn.meza@yahoo.com | summarize value = takeFirst(accountId)',
+        "fetch bizevents | fields accountId, email | filter email ==  | summarize value = takeFirst(accountId)",
         //'fetch bizevents | fields accountId, email | filter email == ' + email + ' | summarize customerId = takeFirst(accountId)',
         //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
       );
     const emailId = Number(emailToId?.records?.[0]?.value);
-    //const emailId = 100
-    console.log("emailId " + emailId)
-
- */}
+    */}
     const emailId = 100
+    //onsole.log("emailId " + emailId)
+
+ 
+    //const emailId = 100
     const [resultStarted, isLoadingFinsihed] = useDQLQuery(
         'fetch bizevents, from:now()-24hr | filter accountId == ' + emailId + ' | filter event.type == "easytrade.trade.buy" | summarize value = sum(amount)',
         //'fetch bizevents, timeframe:"2022-01-20T00:00:00Z/2023-04-29T17:00:00Z"  | filter event.type == "booking.process.started" | summarize value = count()',
@@ -33,7 +38,6 @@ export const Data = ({bizobj}:DataProps) => {
 
     return(
         <Flex>
-            <Paragraph>{bizobj}</Paragraph>
             {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
