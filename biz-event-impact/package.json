@@ -30,7 +30,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dynatrace-sdk/client-query": "1.0.5",
+    "@dynatrace-sdk/client-query": "^1.2.0",
     "@dynatrace-sdk/navigation": "1.0.0",
     "@dynatrace/sdk-web": "0.7.3",
     "@dynatrace/strato-components-preview": "0.95.0",

@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, RunQueryButton, Button } from "@dynatrace/strato-components-preview";
 import { ToastContainer,showToast } from "@dynatrace/strato-components-preview";
-import {Card} from '../components/Card'
 import { Data } from "./Data";
 
 
@@ -41,7 +40,7 @@ export const Home = () => {
       <Paragraph>
         This app is designed to assist a new App developer better understand the basics of the application 
       </Paragraph>
-      <Paragraph>To get started please enter an email address below</Paragraph>
+      <Paragraph>To run the app please enter an email address below</Paragraph>
       <Flex>
           <FormField label="">
             <TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} />
