@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, RunQueryButton, Button } from "@dynatrace/strato-components-preview";
 import { ToastContainer,showToast } from "@dynatrace/strato-components-preview";
-import {Card} from '../components/Card'
 import { Data } from "./Data";
 
 
