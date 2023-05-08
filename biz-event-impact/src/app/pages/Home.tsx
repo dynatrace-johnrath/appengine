@@ -49,7 +49,7 @@ export const Home = () => {
       </Flex>
 
     </Flex>
-    {visable ? <Data bizobj={email}/> : <></>}
+    {visable ? <Data bizobj={email} loading={true}/> : <></>}
     </>
   );
 };

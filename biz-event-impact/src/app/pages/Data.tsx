@@ -8,10 +8,11 @@ import { Header } from "@dynatrace/strato-components-preview/layouts/page/Header
 type DataProps = {
     /**Biz Event Attribute */
     bizobj: string;
+    loading: boolean;
 }
 
 const email = "dawn.meza@yahoo.com"
-export const Data = ({bizobj}:DataProps) => { 
+export const Data = ({bizobj, loading}:DataProps) => { 
     //need to get the customers ID from email for the other queries
     
     //still using static email for now
