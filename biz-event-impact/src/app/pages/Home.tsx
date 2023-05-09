@@ -48,9 +48,9 @@ export const Home = () => {
       <Paragraph>To run the app please enter an email address below</Paragraph>
       <Flex>
           <FormField label="">
-            <TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} />
+            {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> :<TextInput readOnly value={email}/>}
           </FormField>
-          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">CLICK ME!!</Button> : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
+          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand my Trades</Button> : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
       </Flex>
 
     </Flex>
