@@ -27,7 +27,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //...only declaring this as a string before it is passed to the useDQLQuery() function
 
     //passing in userEmail to the query to get account ID
-    const emailToIdDQL = `fetch bizevents | fields accountId, email | filter email == "` + userEmail + `" | summarize value = takeFirst(accountId)`;
+    const emailToIdDQL = `fetch bizevents | fields accountId, email | filter email == "` + bizobj + `" | summarize value = takeFirst(accountId)`;
     //run the query
     const [emailToIdReturn, isLoadingStarted] = useDQLQuery(emailToIdDQL);
     //grab the number value from the query
