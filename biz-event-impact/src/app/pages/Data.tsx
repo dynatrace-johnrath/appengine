@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Paragraph, DQLEditor, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
+import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from '../components/CardDQL';
 
@@ -94,17 +94,18 @@ export const Data = ({bizobj, loading}:DataProps) => {
     return(
         <Flex flexDirection="column" alignItems="center" padding={32}>
         <Heading>User Email: {bizobj}</Heading>
-        { !isLoadingStarted ?<Heading>User Id: {emailToId}</Heading> : <LoadingIndicator/>}
+        { !isLoadingStarted ? <>
+        <Heading>User Id: {emailToId}</Heading>
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 {/* ---Query 2--- */}
-               { !stocksPurchasedAmountIsLoading ? <CardDQL
+               <CardDQL
                     value={stocksPurchasedAmount}
                     chartLabel="Amount purchased (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
                     isLoading={stocksPurchasedAmountIsLoading}
-                /> : <LoadingIndicator/>}
+                /> 
                 {/* ---Query 3--- */}
                 <CardDQL
                     value={stocksSoldAmount}
@@ -132,7 +133,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldDollarsIsLoading}
                 />
-            </Grid>
+            </Grid></> : <LoadingIndicator/>}
         </Flex>
     );
 }
