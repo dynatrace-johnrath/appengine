@@ -1,9 +1,8 @@
 import React from "react"
-import { Flex, Paragraph, DQLEditor, Grid, Heading, useCurrentTheme } from "@dynatrace/strato-components-preview"
-import { Borders, BoxShadows, Colors } from '@dynatrace/strato-design-tokens';
+import { Flex, Paragraph, DQLEditor, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from '../components/CardDQL';
-import { Header } from "@dynatrace/strato-components-preview/layouts/page/Header";
+
 
 type DataProps = {
     /**Biz Event Attribute */
@@ -15,8 +14,8 @@ const email = "dawn.meza@yahoo.com"
 export const Data = ({bizobj, loading}:DataProps) => { 
     //need to get the customers ID from email for the other queries
     
-    //still using static email for now
-    const userEmail = "dawn.meza@yahoo.com"
+    //Const for easy testing
+    //const userEmail = "dawn.meza@yahoo.com"
 
     //------------------Query 1--------------------//
     //Name: emailToId
@@ -94,18 +93,18 @@ export const Data = ({bizobj, loading}:DataProps) => {
     
     return(
         <Flex flexDirection="column" alignItems="center" padding={32}>
-        <Heading>User Email: {userEmail}</Heading>
-        <Heading>User Id: {emailToId}</Heading>
+        <Heading>User Email: {bizobj}</Heading>
+        { !isLoadingStarted ?<Heading>User Id: {emailToId}</Heading> : <LoadingIndicator/>}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 {/* ---Query 2--- */}
-                <CardDQL
+               { !stocksPurchasedAmountIsLoading ? <CardDQL
                     value={stocksPurchasedAmount}
                     chartLabel="Amount purchased (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
-                    isLoading={isLoadingStarted}
-                />
+                    isLoading={stocksPurchasedAmountIsLoading}
+                /> : <LoadingIndicator/>}
                 {/* ---Query 3--- */}
                 <CardDQL
                     value={stocksSoldAmount}
