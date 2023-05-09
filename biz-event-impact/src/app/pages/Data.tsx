@@ -34,7 +34,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
     const emailToId = Number(emailToIdReturn?.records?.[0]?.value);
 
     
-    //------------------Query 1--------------------//
+    //------------------Query 2--------------------//
     //Name: stocksPurchasedAmount
     //Purpose: use user ID from previous query to get dollar amount of stocks sold in the past 24hrs
     //returns: Single number (ex: 930)
@@ -48,7 +48,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //grab the number value from the query
     const stocksPurchasedAmount = Number(stocksPurchasedAmountReturn?.records?.[0]?.value);
     
-    //------------------Query 2--------------------//
+    //------------------Query 3--------------------//
     //Name: stocksSoldAmount
     //Purpose: use user ID from previous query to get dollar amount of stocks sold in the past 24hrs
     //returns: Single number (ex: 930)
@@ -62,7 +62,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //grab the number value from the query
     const stocksSoldAmount = Number(stocksSoldAmountReturn?.records?.[0]?.value);
 
-    //------------------Query 3--------------------//
+    //------------------Query 4--------------------//
     //Name: stocksPurchasedDollars
     //Purpose: use user ID from previous query to get sum dollar amount of stocks purchased in the past 24hrs
     //Returns: Single number (ex: 11,573)
@@ -77,7 +77,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //grab the number value from the query
     const stocksPurchasedDollars = Number(stocksPurchasedDollarsReturn?.records?.[0]?.value);
     
-    //------------------Query 4--------------------//
+    //------------------Query 5--------------------//
     //Name: stocksSoldDollars
     //Purpose: use user ID from previous query to get sum dollar amount of stocks sold in the past 24hrs
     //returns: Single number (ex: 11,573)
@@ -97,16 +97,16 @@ export const Data = ({bizobj, loading}:DataProps) => {
         <Heading>User Email: {userEmail}</Heading>
         <Heading>User Id: {emailToId}</Heading>
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
-                {/* ---Query 1--- */}
+                {/* ---Query 2--- */}
                 <CardDQL
                     value={stocksPurchasedAmount}
                     chartLabel="Amount purchased (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
-                    isLoading={stocksPurchasedAmountIsLoading}
+                    isLoading={isLoadingStarted}
                 />
-                {/* ---Query 2--- */}
+                {/* ---Query 3--- */}
                 <CardDQL
                     value={stocksSoldAmount}
                     chartLabel="Amount sold (24hrs)"
@@ -115,7 +115,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldAmountIsLoading}
                 />
-                {/* ---Query 3--- */}
+                {/* ---Query 4--- */}
                 <CardDQL
                     value={stocksPurchasedDollars}
                     chartLabel="Amount purchased in USD (24hrs)"
@@ -124,7 +124,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksPurchasedDollarsIsLoading}
                 />
-                {/* ---Query 4--- */}
+                {/* ---Query 5--- */}
                 <CardDQL
                     value={stocksSoldDollars}
                     chartLabel="Amount sold in USD (24hrs)"
