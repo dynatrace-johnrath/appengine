@@ -5,7 +5,6 @@ import { Data } from "./components/Data";
 
 
 export const App = () => {
-  const theme = useCurrentTheme();
   const [email,setEmail] = useState('');
   const [visable,setVisable] = useState(false);
 
