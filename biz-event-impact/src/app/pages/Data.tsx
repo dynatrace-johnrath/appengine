@@ -46,15 +46,24 @@ export const Data = ({bizobj, loading}:DataProps) => {
         | filter event.type == "easytrade.trade.buy" 
         | summarize value = sum(amount)`;
     //run the query
-    const [stocksPurchasedReturn, isLoadingFinsihed] = useDQLQuery(stocksPurchasedDQL);
+    const [stocksPurchasedReturn, stocksPurchasedIsLoading] = useDQLQuery(stocksPurchasedDQL);
     //grab the number value from the query
     const stocksPurchased = Number(stocksPurchasedReturn?.records?.[0]?.value);
     
     //------------------Query 3--------------------//
-    //Name: 
+    //Name: stocksSold
     //Purpose: 
     //returns:
 
+    const stocksSoldDQL = `fetch bizevents, from:now()-24hr 
+        | filter accountId == ` + emailToId + ` 
+        | filter event.type == "easytrade.trade.sell" 
+        | summarize value = sum(amount)`;
+    //run the query
+    const [stocksSoldDQLReturn, stocksSoldIsLoading] = useDQLQuery(stocksSoldDQL);
+    //grab the number value from the query
+    const stocksSold = Number(stocksSoldDQLReturn?.records?.[0]?.value);
+    console.log("Value: ", stocksSold)
 
 
 
@@ -68,11 +77,19 @@ export const Data = ({bizobj, loading}:DataProps) => {
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
                     value={stocksPurchased}
-                    chartLabel="Amount of stocks bought (24hrs)"
+                    chartLabel="Amount purchased in USD (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
-                    isLoading={isLoadingFinsihed}
+                    isLoading={stocksPurchasedIsLoading}
+                />
+                <CardDQL
+                    value={stocksSold}
+                    chartLabel="Amount sold in USD (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={2}
+                    isLoading={stocksSoldIsLoading}
                 />
                 <CardDQL
                     value={stocksPurchased}
@@ -80,7 +97,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={0}
-                    isLoading={isLoadingFinsihed}
+                    isLoading={stocksSoldIsLoading}
                 />
                 <CardDQL
                     value={stocksPurchased}
@@ -88,15 +105,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={0}
-                    isLoading={isLoadingFinsihed}
-                />
-                <CardDQL
-                    value={stocksPurchased}
-                    chartLabel="Amount bought (24hrs)"
-                    chartSuffix=""
-                    //chart precision is what decimal you want the result to show
-                    chartPrecision={0}
-                    isLoading={isLoadingFinsihed}
+                    isLoading={stocksSoldIsLoading}
                 />
 
             </Grid>
