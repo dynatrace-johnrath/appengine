@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { Flex, Heading, Paragraph, FormField, TextInput, useCurrentTheme, Button } from "@dynatrace/strato-components-preview";
 import { ToastContainer,showToast } from "@dynatrace/strato-components-preview";
-import { Data } from "./pages/Data";
+import { Data } from "./components/Data";
 
 
 export const App = () => {

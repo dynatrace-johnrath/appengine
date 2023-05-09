@@ -1,7 +1,7 @@
 import React from "react"
 import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
 import { useDQLQuery } from "../hooks/useDQLQuery";
-import { CardDQL } from '../components/CardDQL';
+import { CardDQL } from './CardDQL';
 
 
 type DataProps = {
