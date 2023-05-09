@@ -39,13 +39,15 @@ export const Home = () => {
         width={150}
         height={150}
         style={{ paddingBottom: 32 }}
-      ></img>
+      ></img> 
 
       <Heading>Dynatrace Non-Named Biz Event Impact Anaylsis App</Heading>
+      {!visable ? <>
       <Paragraph>
         This app is designed to assist a new App developer better understand the basics of the application 
       </Paragraph>
       <Paragraph>To run the app please enter an email address below</Paragraph>
+      </> : <Paragraph>Click the Button to search for a new user</Paragraph> }
       <Flex>
           <FormField label="">
             {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> :<TextInput readOnly value={email}/>}
