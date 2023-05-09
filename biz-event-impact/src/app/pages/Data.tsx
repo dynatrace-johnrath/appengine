@@ -7,11 +7,10 @@ import { CardDQL } from '../components/CardDQL';
 type DataProps = {
     /**Biz Event Attribute */
     bizobj: string;
-    loading: boolean;
 }
 
 const email = "dawn.meza@yahoo.com"
-export const Data = ({bizobj, loading}:DataProps) => { 
+export const Data = ({bizobj}:DataProps) => { 
     //need to get the customers ID from email for the other queries
     
     //Const for easy testing

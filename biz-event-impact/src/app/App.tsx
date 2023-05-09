@@ -56,7 +56,7 @@ export const App = () => {
       </Flex>
 
     </Flex>
-    {visable ? <Data bizobj={email} loading={true}/> : <></>}
+    {visable ? <Data bizobj={email}/> : <></>}
     </>
   );
 };
