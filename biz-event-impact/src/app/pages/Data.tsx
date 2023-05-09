@@ -18,8 +18,6 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //still using static email for now
     const userEmail = "dawn.meza@yahoo.com"
 
-
-
     //------------------Query 1--------------------//
     //Name: emailToId
     //Purpose: pass in user email to get the users ID for future queries
@@ -94,16 +92,12 @@ export const Data = ({bizobj, loading}:DataProps) => {
     const stocksSoldDollars = Number(stocksSoldDollarsReturn?.records?.[0]?.value);
 
     
-
-
     return(
         <Flex flexDirection="column" alignItems="center" padding={32}>
-        {/* Adding user ID (email in the future) to the page */}
         <Heading>User Email: {userEmail}</Heading>
         <Heading>User Id: {emailToId}</Heading>
-            
-            {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
+                {/* ---Query 1--- */}
                 <CardDQL
                     value={stocksPurchasedAmount}
                     chartLabel="Amount purchased (24hrs)"
@@ -112,6 +106,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksPurchasedAmountIsLoading}
                 />
+                {/* ---Query 2--- */}
                 <CardDQL
                     value={stocksSoldAmount}
                     chartLabel="Amount sold (24hrs)"
@@ -120,6 +115,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldAmountIsLoading}
                 />
+                {/* ---Query 3--- */}
                 <CardDQL
                     value={stocksPurchasedDollars}
                     chartLabel="Amount purchased in USD (24hrs)"
@@ -128,6 +124,7 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksPurchasedDollarsIsLoading}
                 />
+                {/* ---Query 4--- */}
                 <CardDQL
                     value={stocksSoldDollars}
                     chartLabel="Amount sold in USD (24hrs)"
@@ -136,7 +133,6 @@ export const Data = ({bizobj, loading}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldDollarsIsLoading}
                 />
-
             </Grid>
         </Flex>
     );
