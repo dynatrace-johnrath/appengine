@@ -35,36 +35,65 @@ export const Data = ({bizobj, loading}:DataProps) => {
     //grab the number value from the query
     const emailToId = Number(emailToIdReturn?.records?.[0]?.value);
 
-    //------------------Query 2--------------------//
-    //Name: stocksPurchased
-    //Purpose: use user ID from previous query to get dollar amount of stocks purchased in the past 24hrs
-    //Returns: Single number (ex: 11,573)
+    
+    //------------------Query 1--------------------//
+    //Name: stocksPurchasedAmount
+    //Purpose: use user ID from previous query to get dollar amount of stocks sold in the past 24hrs
+    //returns: Single number (ex: 930)
 
-    //another way of displaying DQL query using ` marks
-    const stocksPurchasedDQL = `fetch bizevents, from:now()-24hr 
+    const stocksPurchasedAmountDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
         | filter event.type == "easytrade.trade.buy" 
         | summarize value = sum(amount)`;
     //run the query
-    const [stocksPurchasedReturn, stocksPurchasedIsLoading] = useDQLQuery(stocksPurchasedDQL);
+    const [stocksPurchasedAmountReturn, stocksPurchasedAmountIsLoading] = useDQLQuery(stocksPurchasedAmountDQL);
     //grab the number value from the query
-    const stocksPurchased = Number(stocksPurchasedReturn?.records?.[0]?.value);
+    const stocksPurchasedAmount = Number(stocksPurchasedAmountReturn?.records?.[0]?.value);
     
-    //------------------Query 3--------------------//
-    //Name: stocksSold
-    //Purpose: 
-    //returns:
+    //------------------Query 2--------------------//
+    //Name: stocksSoldAmount
+    //Purpose: use user ID from previous query to get dollar amount of stocks sold in the past 24hrs
+    //returns: Single number (ex: 930)
 
-    const stocksSoldDQL = `fetch bizevents, from:now()-24hr 
+    const stocksSoldAmountDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
         | filter event.type == "easytrade.trade.sell" 
         | summarize value = sum(amount)`;
     //run the query
-    const [stocksSoldDQLReturn, stocksSoldIsLoading] = useDQLQuery(stocksSoldDQL);
+    const [stocksSoldAmountReturn, stocksSoldAmountIsLoading] = useDQLQuery(stocksSoldAmountDQL);
     //grab the number value from the query
-    const stocksSold = Number(stocksSoldDQLReturn?.records?.[0]?.value);
-    console.log("Value: ", stocksSold)
+    const stocksSoldAmount = Number(stocksSoldAmountReturn?.records?.[0]?.value);
 
+    //------------------Query 3--------------------//
+    //Name: stocksPurchasedDollars
+    //Purpose: use user ID from previous query to get sum dollar amount of stocks purchased in the past 24hrs
+    //Returns: Single number (ex: 11,573)
+
+    //another way of displaying DQL query using ` marks
+    const stocksPurchasedDollarsDQL = `fetch bizevents, from:now()-24hr 
+        | filter accountId == ` + emailToId + ` 
+        | filter event.type == "easytrade.trade.buy" 
+        | summarize value = sum(amount * price)`;
+    //run the query
+    const [stocksPurchasedDollarsReturn, stocksPurchasedDollarsIsLoading] = useDQLQuery(stocksPurchasedDollarsDQL);
+    //grab the number value from the query
+    const stocksPurchasedDollars = Number(stocksPurchasedDollarsReturn?.records?.[0]?.value);
+    
+    //------------------Query 4--------------------//
+    //Name: stocksSoldDollars
+    //Purpose: use user ID from previous query to get sum dollar amount of stocks sold in the past 24hrs
+    //returns: Single number (ex: 11,573)
+
+    const stocksSoldDollarsDQL = `fetch bizevents, from:now()-24hr 
+        | filter accountId == ` + emailToId + ` 
+        | filter event.type == "easytrade.trade.sell" 
+        | summarize value = sum(amount * price)`;
+    //run the query
+    const [stocksSoldDollarsReturn, stocksSoldDollarsIsLoading] = useDQLQuery(stocksSoldDollarsDQL);
+    //grab the number value from the query
+    const stocksSoldDollars = Number(stocksSoldDollarsReturn?.records?.[0]?.value);
+
+    
 
 
     return(
@@ -76,36 +105,36 @@ export const Data = ({bizobj, loading}:DataProps) => {
             {/* <DQLEditor value={initialQuery} /> */}
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 <CardDQL
-                    value={stocksPurchased}
+                    value={stocksPurchasedAmount}
+                    chartLabel="Amount purchased (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={2}
+                    isLoading={stocksPurchasedAmountIsLoading}
+                />
+                <CardDQL
+                    value={stocksSoldAmount}
+                    chartLabel="Amount sold (24hrs)"
+                    chartSuffix=""
+                    //chart precision is what decimal you want the result to show
+                    chartPrecision={2}
+                    isLoading={stocksSoldAmountIsLoading}
+                />
+                <CardDQL
+                    value={stocksPurchasedDollars}
                     chartLabel="Amount purchased in USD (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
-                    isLoading={stocksPurchasedIsLoading}
+                    isLoading={stocksPurchasedDollarsIsLoading}
                 />
                 <CardDQL
-                    value={stocksSold}
+                    value={stocksSoldDollars}
                     chartLabel="Amount sold in USD (24hrs)"
                     chartSuffix=""
                     //chart precision is what decimal you want the result to show
                     chartPrecision={2}
-                    isLoading={stocksSoldIsLoading}
-                />
-                <CardDQL
-                    value={stocksPurchased}
-                    chartLabel="Amount bought (24hrs)"
-                    chartSuffix=""
-                    //chart precision is what decimal you want the result to show
-                    chartPrecision={0}
-                    isLoading={stocksSoldIsLoading}
-                />
-                <CardDQL
-                    value={stocksPurchased}
-                    chartLabel="Amount bought (24hrs)"
-                    chartSuffix=""
-                    //chart precision is what decimal you want the result to show
-                    chartPrecision={0}
-                    isLoading={stocksSoldIsLoading}
+                    isLoading={stocksSoldDollarsIsLoading}
                 />
 
             </Grid>
