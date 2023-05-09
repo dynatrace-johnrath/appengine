@@ -22,7 +22,7 @@
     "eslint-plugin-react-hooks": "^4.5.0"
   },
   "name": "biz-event-impact",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A starting project with routing, fetching Grail™ data, and charting",
   "engines": {
     "node": ">=16.13.0"
