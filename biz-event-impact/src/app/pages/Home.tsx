@@ -9,7 +9,7 @@ export const Home = () => {
   const [email,setEmail] = useState('');
   const [visable,setVisable] = useState(false);
 
-  function event(e) {
+  function clickEvent(e) {
     if (email == ''){
       setVisable(false);
       showToast({
@@ -21,6 +21,11 @@ export const Home = () => {
     }
     else
       setVisable(true);
+  };
+  
+  function resetEvent (e){
+    setVisable(false);
+    setEmail('');
   };
 
   return (
@@ -43,9 +48,9 @@ export const Home = () => {
       <Paragraph>To run the app please enter an email address below</Paragraph>
       <Flex>
           <FormField label="">
-            <TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} />
+            {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> :<TextInput readOnly value={email}/>}
           </FormField>
-          <Button onClick={event} color="primary" variant="accent">CLICK ME!!</Button>
+          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand my Trades</Button> : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
       </Flex>
 
     </Flex>
