@@ -1,17 +1,15 @@
 import React from "react"
 import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
 import { useDQLQuery } from "../hooks/useDQLQuery";
-import { CardDQL } from '../components/CardDQL';
+import { CardDQL } from './CardDQL';
 
-
+//Properties to pass into this component
 type DataProps = {
     /**Biz Event Attribute */
     bizobj: string;
-    loading: boolean;
 }
-
-const email = "dawn.meza@yahoo.com"
-export const Data = ({bizobj, loading}:DataProps) => { 
+//Component housing all our data
+export const Data = ({bizobj}:DataProps) => { 
     //need to get the customers ID from email for the other queries
     
     //Const for easy testing
