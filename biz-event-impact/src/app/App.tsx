@@ -59,10 +59,12 @@ export const App = () => {
       <Flex>
           <FormField label="">
             {/* if the data is visable ensure that users cannot edit the FormField */}
-            {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> :<TextInput readOnly value={email}/>}
+            {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> 
+            :<TextInput readOnly value={email}/>}
           </FormField>
           {/* Change which button to use depending on if data is currently shown */}
-          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand my Trades</Button> : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
+          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand my Trades</Button> 
+          : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
       </Flex>
 
     </Flex>
