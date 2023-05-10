@@ -3,13 +3,12 @@ import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-compone
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from './CardDQL';
 
-
+//Properties to pass into this component
 type DataProps = {
     /**Biz Event Attribute */
     bizobj: string;
 }
-
-const email = "dawn.meza@yahoo.com"
+//Component housing all our data
 export const Data = ({bizobj}:DataProps) => { 
     //need to get the customers ID from email for the other queries
     

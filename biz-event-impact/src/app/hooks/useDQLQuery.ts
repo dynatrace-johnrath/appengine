@@ -1,9 +1,7 @@
 import { queryExecutionClient, QueryResult} from '@dynatrace-sdk/client-query';
 import { useState,useEffect } from 'react';
 
-
-
-
+//Hook for executing DQL Queries Returns Result and Loading State
 export const useDQLQuery = (query: string): [QueryResult | undefined, boolean] => {
   //Initialize State object to return to calling component
   const [result, setResult] = useState<QueryResult>();
