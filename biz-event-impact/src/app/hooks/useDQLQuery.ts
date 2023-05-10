@@ -5,14 +5,18 @@ import { useState,useEffect } from 'react';
 
 
 export const useDQLQuery = (query: string): [QueryResult | undefined, boolean] => {
+  //Initialize State object to return to calling component
   const [result, setResult] = useState<QueryResult>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   
+  //Trigger something to happen
   useEffect(() => {
+    //Setup Signal needed for queryExecution
     const abortController = new AbortController();
     const abortSignal = abortController.signal;
-  
+    //set loading state to true while we wait for the query
     setIsLoading(true);
+    //leverage the queryExecution client to run DQL
     queryExecutionClient
       .queryExecute({
         body: {
@@ -21,14 +25,15 @@ export const useDQLQuery = (query: string): [QueryResult | undefined, boolean] =
         },
         abortSignal,
       })
-      .then((res) => setResult(res.result))
-      .catch((e) => console.error(e))
-      .finally(() => setIsLoading(false));
+      .then((res) => setResult(res.result)) //set result
+      .catch((e) => console.error(e)) // catch any errors
+      .finally(() => setIsLoading(false)); //set loading to finished
   
     return () => {
       abortController.abort();
     };
-  }, [query]);
+
+  }, [query]); //query is the parameter the event needs
 
   return [result, isLoading];
 };
