@@ -4,7 +4,7 @@ const config: CliOptions = {
   environmentUrl: 'https://bwm98081.apps.dynatrace.com/',
   app: {
     name: 'Biz Event Impact',
-    version: '0.1.0',
+    version: '0.1.1',
     description: 'A starting project with routing, fetching Grail™ data, and charting',
     id: 'dtse.noramnn.biz.event.impact',
     scopes:[

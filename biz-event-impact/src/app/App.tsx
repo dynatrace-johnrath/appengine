@@ -56,7 +56,7 @@ export const App = () => {
       </Paragraph>
       <Paragraph>To run the app please enter an email address below</Paragraph>
       </>  : <Paragraph>Click the Button to search for a new user</Paragraph> }
-      <Flex>
+      <Flex flexDirection="initial" alignItems="self-end">
           <FormField label="">
             {/* if the data is visable ensure that users cannot edit the FormField */}
             {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> 
