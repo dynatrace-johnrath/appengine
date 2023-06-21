@@ -23,8 +23,11 @@ export const Data = ({bizobj}:DataProps) => {
     //have to delcare the query before calling query function (single quote or double quote or ` does not matter...)
     //...only declaring this as a string before it is passed to the useDQLQuery() function
 
-    //passing in userEmail to the query to get account ID
-    const emailToIdDQL = `fetch bizevents | fields accountId, email | filter email == "` + bizobj + `" | summarize value = takeFirst(accountId)`;
+    //passing in bizobj to the query to get account ID
+    const emailToIdDQL = `fetch bizevents 
+    | fields accountId, email 
+    | filter email == "` + bizobj + `" 
+    | summarize value = takeFirst(accountId)`;
     //run the query
     const [emailToIdReturn, isLoadingStarted] = useDQLQuery(emailToIdDQL);
     //grab the number value from the query
