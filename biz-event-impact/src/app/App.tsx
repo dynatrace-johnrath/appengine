@@ -47,7 +47,7 @@ export const App = () => {
         height={150}
         style={{ paddingBottom: 32 }}
       ></img> 
-      <Heading>Dynatrace Non-Named Biz Event Impact Anaylsis App</Heading>
+      <Heading>Dynatrace Non-Named Biz Event Impact Analysis App</Heading>
       {/* Leverage visible variable to ensure the proper copy is displayed to the end user */}
       {!visable ? <>
       <Paragraph>
@@ -63,7 +63,7 @@ export const App = () => {
             :<TextInput readOnly value={email}/>}
           </FormField>
           {/* Change which button to use depending on if data is currently shown */}
-          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand my Trades</Button> 
+          {!visable ? <Button onClick={clickEvent} color="primary" variant="accent">Understand My Trades</Button> 
           : <Button onClick={resetEvent} color="primary" variant="accent">Reset</Button>}
       </Flex>
 

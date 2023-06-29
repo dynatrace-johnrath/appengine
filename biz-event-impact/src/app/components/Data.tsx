@@ -1,8 +1,6 @@
 import React from "react"
 import { Flex, Grid, Heading, LoadingIndicator,TimeseriesChart } from "@dynatrace/strato-components-preview"
 import { convertToTimeseries } from '@dynatrace/strato-components-preview/conversion-utilities'
-
-
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from './CardDQL';
 
@@ -26,8 +24,11 @@ export const Data = ({bizobj}:DataProps) => {
     //have to delcare the query before calling query function (single quote or double quote or ` does not matter...)
     //...only declaring this as a string before it is passed to the useDQLQuery() function
 
-    //passing in userEmail to the query to get account ID
-    const emailToIdDQL = `fetch bizevents | fields accountId, email | filter email == "` + bizobj + `" | summarize value = takeFirst(accountId)`;
+    //passing in bizobj to the query to get account ID
+    const emailToIdDQL = `fetch bizevents 
+    | fields accountId, email 
+    | filter email == "` + bizobj + `" 
+    | summarize value = takeFirst(accountId)`;
     //run the query
     const [emailToIdReturn, isLoadingStarted] = useDQLQuery(emailToIdDQL);
     //grab the number value from the query
@@ -105,6 +106,7 @@ export const Data = ({bizobj}:DataProps) => {
         <Flex flexDirection="column" alignItems="center" padding={32}>
         <Heading>User Email: {bizobj}</Heading>
         { !isLoadingStarted ? <>
+        {/* ---Query 1--- */}
         <Heading>User Id: {emailToId}</Heading>
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 {/* ---Query 2--- */}
