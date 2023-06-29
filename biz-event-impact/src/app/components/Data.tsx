@@ -97,7 +97,7 @@ export const Data = ({bizobj}:DataProps) => {
     //Purpose: returns a series of values of the amount of stocks sold over 24 hrs
     //returns: Timeseries of counts
     const sellAmountChartDQL = `fetch bizevents, from:now()-24hr 
-    | filter accountId == 56
+    | filter accountId == ` + emailToId + `
     | filter event.type == "easytrade.trade.sell" 
     | summarize value = sum(amount), by:{timestamp}`
     const [sellAmountChartReturn, sellAmountChartIsLoading] = useDQLQuery(sellAmountChartDQL);
