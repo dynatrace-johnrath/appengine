@@ -1,5 +1,8 @@
 import React from "react"
-import { Flex, Grid, Heading, LoadingIndicator,TimeseriesChart,convertToTimeseries } from "@dynatrace/strato-components-preview"
+import { Flex, Grid, Heading, LoadingIndicator,TimeseriesChart } from "@dynatrace/strato-components-preview"
+import { convertToTimeseries } from '@dynatrace/strato-components-preview/conversion-utilities'
+
+
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from './CardDQL';
 
@@ -97,7 +100,6 @@ export const Data = ({bizobj}:DataProps) => {
     | filter event.type == "easytrade.trade.sell" 
     | summarize value = sum(amount), by:{timestamp}`
     const [sellAmountChartReturn, sellAmountChartIsLoading] = useDQLQuery(sellAmountChartDQL);
-
     
     return(
         <Flex flexDirection="column" alignItems="center" padding={32}>
@@ -141,7 +143,9 @@ export const Data = ({bizobj}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldDollarsIsLoading}
                 />
-            </Grid></> : <LoadingIndicator/>}
+            </Grid>
+            <TimeseriesChart data={convertToTimeseries(sellAmountChartReturn?.records||[],sellAmountChartReturn?.types||[]) } gapPolicy="connect"/>
+            </> : <LoadingIndicator/>}
         </Flex>
     );
 }
