@@ -1,5 +1,5 @@
-import React from "react"
-import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview"
+import React from "react";
+import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview";
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from './CardDQL';
 
@@ -96,6 +96,7 @@ export const Data = ({bizobj}:DataProps) => {
         <Flex flexDirection="column" alignItems="center" padding={32}>
         <Heading>User Email: {bizobj}</Heading>
         { !isLoadingStarted ? <>
+        {/* ---Query 1--- */}
         <Heading>User Id: {emailToId}</Heading>
             <Grid gap={32} gridTemplateColumns={'2fr 2fr'}>
                 {/* ---Query 2--- */}
