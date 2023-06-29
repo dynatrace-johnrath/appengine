@@ -3,7 +3,6 @@ import { Flex, Heading, Paragraph, FormField, TextInput, Button } from "@dynatra
 import { ToastContainer,showToast } from "@dynatrace/strato-components-preview";
 import { Data } from "./components/Data";
 
-
 export const App = () => {
   //Variables to be used for this page
   const [email,setEmail] = useState('');
@@ -59,7 +58,8 @@ export const App = () => {
       <Flex flexDirection="initial" alignItems="self-end">
           <FormField label="">
             {/* if the data is visable ensure that users cannot edit the FormField */}
-            {!visable ?<TextInput placeholder="john.smith@dynatraceapps.com" value={email} onChange={setEmail} /> 
+            {/* Could have looked at moving the setEmail to my clickEvent handler instead of locking the field */}
+            {!visable ?<TextInput placeholder="john.lagona@dtinside.com" value={email} onChange={setEmail} /> 
             :<TextInput readOnly value={email}/>}
           </FormField>
           {/* Change which button to use depending on if data is currently shown */}

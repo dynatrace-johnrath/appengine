@@ -1,5 +1,6 @@
-import React from "react";
-import { Flex, Grid, Heading, LoadingIndicator } from "@dynatrace/strato-components-preview";
+import React from "react"
+import { Flex, Grid, Heading, LoadingIndicator,TimeseriesChart } from "@dynatrace/strato-components-preview"
+import { convertToTimeseries } from '@dynatrace/strato-components-preview/conversion-utilities'
 import { useDQLQuery } from "../hooks/useDQLQuery";
 import { CardDQL } from './CardDQL';
 
@@ -91,6 +92,15 @@ export const Data = ({bizobj}:DataProps) => {
     //grab the number value from the query
     const stocksSoldDollars = Number(stocksSoldDollarsReturn?.records?.[0]?.value);
 
+    //------------------Query 6--------------------//
+    //Name: sellAmountChart
+    //Purpose: returns a series of values of the amount of stocks sold over 24 hrs
+    //returns: Timeseries of counts
+    const sellAmountChartDQL = `fetch bizevents, from:now()-24hr 
+    | filter accountId == 56
+    | filter event.type == "easytrade.trade.sell" 
+    | summarize value = sum(amount), by:{timestamp}`
+    const [sellAmountChartReturn, sellAmountChartIsLoading] = useDQLQuery(sellAmountChartDQL);
     
     return(
         <Flex flexDirection="column" alignItems="center" padding={32}>
@@ -135,7 +145,9 @@ export const Data = ({bizobj}:DataProps) => {
                     chartPrecision={2}
                     isLoading={stocksSoldDollarsIsLoading}
                 />
-            </Grid></> : <LoadingIndicator/>}
+            </Grid>
+            <TimeseriesChart data={convertToTimeseries(sellAmountChartReturn?.records||[],sellAmountChartReturn?.types||[]) } gapPolicy="connect"/>
+            </> : <LoadingIndicator/>}
         </Flex>
     );
 }
