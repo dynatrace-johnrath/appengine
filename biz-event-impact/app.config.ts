@@ -12,6 +12,7 @@ const config: CliOptions = {
     {name: 'storage:bizevents:read', comment: 'Read bizevents from Grail'},
     {name: 'storage:buckets:read', comment: 'Read buckets from Grail'}]
   },
+  icon: '<Your-Icon-Path>',
 };
 
 module.exports = config;
