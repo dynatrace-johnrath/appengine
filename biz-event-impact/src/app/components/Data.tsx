@@ -42,7 +42,7 @@ export const Data = ({bizobj}:DataProps) => {
 
     const stocksPurchasedAmountDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
-        | filter event.type == "easytrade.trade.buy" 
+        | filter event.type == "com.easytrade.buy.start" 
         | summarize value = sum(amount)`;
     //run the query
     const [stocksPurchasedAmountReturn, stocksPurchasedAmountIsLoading] = useDQLQuery(stocksPurchasedAmountDQL);
@@ -56,7 +56,7 @@ export const Data = ({bizobj}:DataProps) => {
 
     const stocksSoldAmountDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
-        | filter event.type == "easytrade.trade.sell" 
+        | filter event.type == "com.easytrade.sell.start" 
         | summarize value = sum(amount)`;
     //run the query
     const [stocksSoldAmountReturn, stocksSoldAmountIsLoading] = useDQLQuery(stocksSoldAmountDQL);
@@ -71,7 +71,7 @@ export const Data = ({bizobj}:DataProps) => {
     //another way of displaying DQL query using ` marks
     const stocksPurchasedDollarsDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
-        | filter event.type == "easytrade.trade.buy" 
+        | filter event.type == "com.easytrade.buy.start" 
         | summarize value = sum(amount * price)`;
     //run the query
     const [stocksPurchasedDollarsReturn, stocksPurchasedDollarsIsLoading] = useDQLQuery(stocksPurchasedDollarsDQL);
@@ -85,7 +85,7 @@ export const Data = ({bizobj}:DataProps) => {
 
     const stocksSoldDollarsDQL = `fetch bizevents, from:now()-24hr 
         | filter accountId == ` + emailToId + ` 
-        | filter event.type == "easytrade.trade.sell" 
+        | filter event.type == "com.easytrade.sell.start" 
         | summarize value = sum(amount * price)`;
     //run the query
     const [stocksSoldDollarsReturn, stocksSoldDollarsIsLoading] = useDQLQuery(stocksSoldDollarsDQL);
@@ -96,10 +96,10 @@ export const Data = ({bizobj}:DataProps) => {
     //Name: sellAmountChart
     //Purpose: returns a series of values of the amount of stocks sold over 24 hrs
     //returns: Timeseries of counts
-    const sellAmountChartDQL = `fetch bizevents, from:now()-30d 
+    const sellAmountChartDQL = `fetch bizevents, from:now()-24hr 
     | filter accountId == ` + emailToId + `
-    | filter event.type == "easytrade.trade.sell" 
-    | summarize AccountsTraded = sum(amount), by:{timestamp}`
+    | filter event.type == "com.easytrade.sell.start" 
+    | summarize value = sum(amount), by:{timestamp}`
     const [sellAmountChartReturn, sellAmountChartIsLoading] = useDQLQuery(sellAmountChartDQL);
     
     return(
