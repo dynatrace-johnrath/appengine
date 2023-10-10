@@ -1,7 +1,7 @@
 import type { CliOptions } from '@dynatrace/dt-app';
 
 const config: CliOptions = {
-  environmentUrl: 'https://guu84124.apps.dynatrace.com/',
+  environmentUrl: 'https://bwm98081.apps.dynatrace.com/',
   app: {
     name: 'Biz Event Impact',
     version: '0.1.2',
