@@ -1,38 +1,36 @@
-import { queryExecutionClient, QueryResult} from '@dynatrace-sdk/client-query';
-import { useState,useEffect } from 'react';
+import React from "react";
+import { SingleValue, Flex } from '@dynatrace/strato-components-preview';
+import { Borders, BoxShadows, Colors } from '@dynatrace/strato-design-tokens';
+import { ProgressCircle } from '@dynatrace/strato-components-preview';
 
-//Hook for executing DQL Queries Returns Result and Loading State
-export const useDQLQuery = (query: string): [QueryResult | undefined, boolean] => {
-  //Initialize State object to return to calling component
-  const [result, setResult] = useState<QueryResult>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  
-  //Trigger something to happen
-  useEffect(() => {
-    //Setup Signal needed for queryExecution
-    const abortController = new AbortController();
-    const abortSignal = abortController.signal;
-    //set loading state to true while we wait for the query
-    setIsLoading(true);
-    //leverage the queryExecution client to run DQL
-    queryExecutionClient
-      .queryExecute({
-        body: {
-          query,
-          requestTimeoutMilliseconds: 30000,
-        },
-        abortSignal,
-      })
-      .then((res) => setResult(res.result)) //set result
-      .catch((e) => console.error(e)) // catch any errors
-      .finally(() => setIsLoading(false)); //set loading to finished
-  
-    return () => {
-      abortController.abort();
-    };
+interface CardProps {
+    value: number;
+    chartLabel: string;
+    chartSuffix: string;
+    chartPrecision: number;
+    isLoading: boolean;
+  }
 
-  }, [query]); //query is the parameter the event needs
+  export const CardDQL = ({ value, chartLabel, chartSuffix, chartPrecision, isLoading }: CardProps) => {
 
-  return [result, isLoading];
-};
-
+    return (
+      <Flex style={{
+        border: Colors.Border.Neutral.Default,
+        borderRadius: Borders.Radius.Container.Subdued,
+        background: Colors.Background.Surface.Default,
+        boxShadow: BoxShadows.Surface.Raised.Rest,
+        width: '400px',
+        height: '120px',
+        alignItems: "center",
+        justifyContent: 'center',
+      }}>
+        {isLoading && <ProgressCircle />}
+        {Number.isFinite(value) && (
+          <SingleValue
+            data={value}
+            label={chartLabel}
+          />
+        )}
+      </Flex>
+    );
+  };
