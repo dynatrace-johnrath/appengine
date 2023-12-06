@@ -1,2 +1,2 @@
 # appengine
-code base for https://dynatrace-my.sharepoint.com/:w:/p/kyle_kowalski/EW9fXivExsdAscHSv5DgNacBvQOBKJntmpb0Q_T_QA4dOg?e=DnDgKW
+code base for University Lab https://university.dynatrace.com/ondemand/course/29482/lab-guide/41207?content=exercises&exercise=42757
